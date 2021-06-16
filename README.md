@@ -1,2 +1,2 @@
 # Quizzz
- Create and share quizes and polls
+ Create and share quizes and polls.
