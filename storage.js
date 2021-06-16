@@ -33,7 +33,7 @@ function getQuiz(quizid, userid) {
             }
         }
     }
-    return undefined;
+    return null;
 }
 
 module.exports = { createUser, createQuiz, getQuiz };

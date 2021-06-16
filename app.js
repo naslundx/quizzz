@@ -1,3 +1,5 @@
+/*jshint globalstrict: true*/
+
 const express = require('express');
 const { query, validationResult } = require('express-validator');
 const { createUser, createQuiz, getQuiz } = require('./storage'); 
@@ -22,7 +24,7 @@ app.get("/createuuid", (req, res) => {
     const uid = createUser();
     res.writeHead(200);
     res.end(uid.toString());
-})
+});
 
 // Pages
 app.get("/", (req, res) => {
@@ -35,7 +37,7 @@ app.get("/edit", [query("quizid").isInt(), query("userid").isInt()], (req, res) 
 
     const result = getQuiz(quizid, userid);
 
-    if (result === undefined) {
+    if (result === null) {
         return res.render("pages/refused");
     }
 
@@ -46,7 +48,13 @@ app.get("/answer", (req, res) => {
     const quizid = req.params.quizid;
     const userid = req.params.userid;
 
+    // TODO check if already answered, if so get results
+
     const result = getQuiz(quizid, userid);
+
+    if (result === null) {
+        return res.render("pages/refused");
+    }
 
     res.render("pages/answer", result)
 })
@@ -56,6 +64,12 @@ app.get("/result", (req, res) => {
     const userid = req.params.userid;
 
     const result = getQuiz(quizid, userid);
+
+    if (result === null) {
+        return res.render("pages/refused");
+    }
+
+    // TODO get answer stats
 
     res.render("pages/result", result)
 })

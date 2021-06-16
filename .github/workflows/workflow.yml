@@ -20,7 +20,9 @@ jobs:
         
     - run: npm install
 
-    - run: npm test
+    - run: npm test  # TODO run linter on all js files, browser and node
+
+    # TODO actual tests - try calling endpoints?
 
   deploy:
     runs-on: ubuntu-latest
