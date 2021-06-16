@@ -1,0 +1,24 @@
+<html>
+<head>
+    <%- include('../partial/head.ejs') %>
+</head>
+<body>
+    <%- include('../partial/header.ejs') %>
+
+    <p>Quiz <%= quizid %></p>
+    <p>User <%= userid %></p>
+
+    <p>Question:</p>
+    <input type="text" id="question">
+    <p>Answer:</p>
+    <input type="text" id="answers">
+
+    <button onclick="save()">Save</button>
+
+    <p>Answer: <b>/answer?quizid=</b></p>
+
+    <%- include('../partial/footer.ejs') %>
+
+    <script src="js/index.js"></script>
+</body>
+</html>

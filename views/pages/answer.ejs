@@ -5,11 +5,16 @@
 <body>
     <%- include('../partial/header.ejs') %>
 
-    <div>
-        <button onclick="create()" id="submit">Create</button>
-        <button onclick="view()" id="view">View</button>
-        <button onclick="join()" id="join">Join</button>
-    </div>
+    <p>Quiz <%= quizid %></p>
+    <p>User <%= userid %></p>
+
+    <p>Question: <%=question%></p>
+    <p>Answer:</p>
+    <ul>
+
+    </ul>
+
+    <button onclick="submitanswer()">Answer</button>
 
     <%- include('../partial/footer.ejs') %>
 
