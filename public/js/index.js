@@ -8,14 +8,10 @@ function create() {
         .catch((reason) => console.log(reason));
 }
 
-function view() {
-    // TODO
-}
-
-function stats() {
-
-}
-
 function save() {
+    // TODO update entry on quiz
+}
 
+function submitanswer() {
+    // TODO submit answer
 }

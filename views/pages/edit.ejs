@@ -10,12 +10,14 @@
 
     <p>Question:</p>
     <input type="text" id="question">
-    <p>Answer:</p>
+    <p>Answer: (Comma-separated)</p>
     <input type="text" id="answers">
 
     <button onclick="save()">Save</button>
 
-    <p>Answer: <b>/answer?quizid=</b></p>
+    <p>Send this link: <b>/answer?<%= quizid %></b></p>
+
+    <p><a href="/result?quizid=<%=quizid%>&userid=<%=userid%>">View answers</a></p>
 
     <%- include('../partial/footer.ejs') %>
 
