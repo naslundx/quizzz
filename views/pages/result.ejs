@@ -10,7 +10,9 @@
 
     <p>Question: <%= question %></p>
 
-    <!-- TODO: LIST ALL ANSWERS + STATS -->
+    <% Object.keys(answers).forEach(answer) { %>
+        <%=answer%>: <b><%=answers[answer]%></b>
+    <% }); %>
 
     <%- include('../partial/footer.ejs') %>
 

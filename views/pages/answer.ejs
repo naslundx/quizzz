@@ -8,11 +8,12 @@
     <p>Quiz <%= quizid %></p>
     <p>User <%= userid %></p>
 
-    <p>Question: <%=question%></p>
+    <p>Question: <%= question %></p>
     <p>Answer:</p>
-    <ul>
-        <!-- TODO LIST POSSIBLE ANSWERS -->
-    </ul>
+    <% answers.forEach(function(answer) { %>
+        <input type="radio" name="question" value="<%=answer%>" id="<%=answer%>">
+        <label for="<%=answer%>"><%=answer%></label>
+    <% }); %>
 
     <button onclick="submitanswer()">Answer</button>
 

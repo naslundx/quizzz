@@ -2,7 +2,7 @@
 
 const express = require('express');
 const { query, validationResult } = require('express-validator');
-const { createUser, createQuiz, getQuiz } = require('./storage'); 
+const db = require('./storage'); 
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -15,15 +15,38 @@ app.get('/create', [query("userid").isInt()], (req, res) => {
         return res.end(errors[0]);
     }
 
-    const uid = createQuiz(req.query.userid);
+    const uid = db.createQuiz(req.query.userid);
     res.writeHead(200);
     res.end(uid.toString());
 });
 
 app.get("/createuuid", (req, res) => {
-    const uid = createUser();
+    const uid = db.createUser();
     res.writeHead(200);
     res.end(uid.toString());
+});
+
+app.get("/setquiz", (req, res) => {
+    const quizid = req.query.quizid;
+    const userid = req.query.userid;
+    const question = req.query.question;
+    const answers = req.query.answers;
+
+    db.setQuiz(quizid, userid, question, answers);
+
+    res.writeHead(200);
+    res.end("OK");
+});
+
+app.get("/setanswer", (req, res) => {
+    const quizid = req.query.quizid;
+    const userid = req.query.userid;
+    const answer = req.query.answer;
+
+    db.setAnswer(quizid, userid, answer);
+
+    res.writeHead(200);
+    res.end("OK");
 });
 
 // Pages
@@ -35,44 +58,51 @@ app.get("/edit", [query("quizid").isInt(), query("userid").isInt()], (req, res) 
     const quizid = req.query.quizid;
     const userid = req.query.userid;
 
-    const result = getQuiz(quizid, userid);
+    const result = db.getQuiz(quizid, userid);
 
     if (result === null) {
         return res.render("pages/refused");
     }
 
     res.render("pages/edit", result);
-})
+});
 
 app.get("/answer", (req, res) => {
     const quizid = req.params.quizid;
     const userid = req.params.userid;
 
-    // TODO check if already answered, if so get results
-
-    const result = getQuiz(quizid, userid);
+    const result = db.getQuiz(quizid, userid);
 
     if (result === null) {
         return res.render("pages/refused");
     }
 
-    res.render("pages/answer", result)
-})
+    let quiz = {
+        quizid,
+        userid,
+        question: result.question,
+        answers: result.answers.split(",")
+    };
+
+    res.render("pages/answer", quiz);
+});
 
 app.get("/result", (req, res) => {
     const quizid = req.params.quizid;
     const userid = req.params.userid;
 
-    const result = getQuiz(quizid, userid);
+    const quiz = db.getQuiz(quizid, userid);
+    const answers = db.getStats(quizid, userid);
 
-    if (result === null) {
-        return res.render("pages/refused");
-    }
+    const data = {
+        quizid,
+        userid,
+        question: quiz.question,
+        answers
+    };
 
-    // TODO get answer stats
-
-    res.render("pages/result", result)
-})
+    res.render("pages/result", data);
+});
 
 // Static data
 app.use(express.static('public'));

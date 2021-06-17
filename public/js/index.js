@@ -9,9 +9,27 @@ function create() {
 }
 
 function save() {
-    // TODO update entry on quiz
+    const userid = getCookie("userid");
+
+    const question = document.querySelector("#question").value;
+    const answers = document.querySelector("#answers").value;
+
+    const url = "/setQuiz?userid=" + userid +
+                "&quizid=" + quizid +
+                "&question=" + question +
+                "&answers=" + answers;
+
+    makeRequest("GET", url);
 }
 
 function submitanswer() {
-    // TODO submit answer
+    const userid = getCookie("userid");
+
+    const answer = document.querySelector('input[name="answer"]:checked').value;
+    
+    const url = "/setAnswer?quizid=" + quizid +
+                "&userid=" + userid +
+                "&answer=" + answer;
+
+    makeRequest("GET", url);
 }

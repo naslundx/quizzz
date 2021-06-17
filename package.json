@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "jshint app.js"
+    "test": "jshint . --exclude node_modules/,public/"
   },
   "repository": {
     "type": "git",
