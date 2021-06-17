@@ -1,7 +1,7 @@
 {
-  "name": "bestwebsite",
+  "name": "Quizzz",
   "version": "0.0.1",
-  "description": "Best website in the world!",
+  "description": "Create and share basic quizzes and polls",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/naslundx/bestwebsite.git"
+    "url": "git+https://github.com/naslundx/quizzz.git"
   },
   "author": "Marcus Näslund",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/naslundx/bestwebsite/issues"
+    "url": "https://github.com/naslundx/quizzz/issues"
   },
-  "homepage": "https://github.com/naslundx/bestwebsite#readme",
+  "homepage": "https://github.com/naslundx/quizzz#readme",
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.1",
